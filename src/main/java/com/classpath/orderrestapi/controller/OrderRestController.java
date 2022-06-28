@@ -1,5 +1,6 @@
 package com.classpath.orderrestapi.controller;
 
+import java.util.Map;
 import java.util.Set;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.classpath.orderrestapi.model.Order;
 import com.classpath.orderrestapi.service.OrderService;
@@ -22,8 +24,13 @@ public class OrderRestController {
 	}
 	
 	@GetMapping
-	public Set<Order> fetchAllOrders(){
-		return this.orderService.fetchAllOrders();
+	public Map<String, Object> fetchAllOrders(
+			@RequestParam(name = "page", defaultValue = "0", required = false) int pageNo,
+			@RequestParam(name = "size", defaultValue = "10", required = false) int size,
+			@RequestParam(name = "order", defaultValue = "asc", required = false) String direction,
+			@RequestParam(name = "field", defaultValue = "name", required = false) String property
+			){
+		return this.orderService.fetchAllOrders(pageNo, size, direction, property);
 	}
 	
 	@GetMapping("/{id}")

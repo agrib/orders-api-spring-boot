@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,9 @@ public class BootstrapApplicationData implements ApplicationListener<Application
 
 	private final OrderRepository orderRepository;
 	
+	@Value("${app.order.count}")
+	private int orderCount;
+	
 	private final Faker faker = new Faker();
 	
 	public BootstrapApplicationData(OrderRepository orderRepository) {
@@ -33,7 +37,7 @@ public class BootstrapApplicationData implements ApplicationListener<Application
 		// new Order("Ramesh", "Aravind", 12, 34, true, true ,false);
 		
 		//for(int i = 0; i < 100; i++) {
-		range(0, 101)
+		range(0, orderCount)
 			.forEach(index -> {
 				String name = faker.name().firstName();
 				Order order = Order
