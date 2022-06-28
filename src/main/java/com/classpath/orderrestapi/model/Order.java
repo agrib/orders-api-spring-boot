@@ -1,5 +1,6 @@
 package com.classpath.orderrestapi.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,8 +29,10 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class Order {
+public class Order implements Serializable{
 	
+	private static final long serialVersionUID = -9167446676885721620L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

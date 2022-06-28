@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.classpath.orderrestapi.model.LineItem;
 import com.classpath.orderrestapi.model.Order;
@@ -18,6 +19,7 @@ import com.classpath.orderrestapi.repository.OrderRepository;
 import com.github.javafaker.Faker;
 
 @Configuration
+@Profile({"dev", "qa"})
 public class BootstrapApplicationData implements ApplicationListener<ApplicationReadyEvent>{
 
 	private final OrderRepository orderRepository;

@@ -1,22 +1,3 @@
-app:
-  loadUser: false
-  order:
-    count: 20000
-  
-debug: false
-
-server:
-  port: 8222
-
 spring:
-  datasource: 
-    url: jdbc:h2:mem:orders_db
-    username: sa
-    password: welcome
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: create   
-    properties:
-      hibernate:
-        format_sql: false
+  profiles:
+    active: qa
