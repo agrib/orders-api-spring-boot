@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import com.classpath.orderrestapi.dto.OrderDto;
 import com.classpath.orderrestapi.model.Order;
 import com.classpath.orderrestapi.repository.OrderRepository;
 
@@ -35,12 +37,12 @@ public class OrderService {
 		//set the pagination support
 		Sort.Direction direction = strDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		Pageable pageRequest = PageRequest.of(pageNo, size, direction, property);
-		Page<Order> pageResponse = this.orderRepository.findAll(pageRequest);
+		Page<OrderDto> pageResponse = this.orderRepository.findBy(pageRequest);
 		
 		int numberOfElements = pageResponse.getNumberOfElements();
 		long totalElements = pageResponse.getTotalElements();
 		int totalPages = pageResponse.getTotalPages();
-		List<Order> data = pageResponse.getContent();
+		List<OrderDto> data = pageResponse.getContent();
 		
 		Map<String, Object> responseMap = new LinkedHashMap<>();
 		
