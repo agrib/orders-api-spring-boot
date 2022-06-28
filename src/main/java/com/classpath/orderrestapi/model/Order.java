@@ -1,7 +1,10 @@
 package com.classpath.orderrestapi.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,8 +37,16 @@ public class Order {
 	
 	private LocalDate orderDate;
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade=CascadeType.ALL)
 	@JsonManagedReference
 	private Set<LineItem> lineItems;
+	
+	public void addLineItem(LineItem lineItem) {
+		if (this.lineItems == null) {
+			this.lineItems = new HashSet<>();
+		}
+		this.lineItems.add(lineItem);
+		lineItem.setOrder(this);
+	}
 
 }
