@@ -11,6 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,13 +35,21 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotEmpty(message = "Customer name cannot be blank")
+	@NotNull(message = "Customer name is mandatory")
 	private String name;
+	
+	@Email(message="email is not in correct format")
 	private String email;
+	
+	@Min(value = 400, message = "min order price should be 400")
+	@Max(value = 40000, message = "max order price should be 40000")
 	private double price;
 	
 	//This is mandate from Hibernate
 	private Order() {}
 	
+	@PastOrPresent(message="order date cannot be in the future")
 	private LocalDate orderDate;
 	
 	@OneToMany(mappedBy = "order", cascade=CascadeType.ALL)

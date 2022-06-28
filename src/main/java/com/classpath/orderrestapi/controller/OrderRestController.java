@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +63,7 @@ public class OrderRestController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Order saveOrder(@RequestBody Order order) {
+	public Order saveOrder(@RequestBody @Valid Order order) {
 		return this.orderService.save(order);
 	}
 }
