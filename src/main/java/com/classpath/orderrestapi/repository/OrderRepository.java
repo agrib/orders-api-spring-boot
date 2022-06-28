@@ -1,5 +1,7 @@
 package com.classpath.orderrestapi.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +14,7 @@ import com.classpath.orderrestapi.model.Order;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 	
 	Page<OrderDto> findBy(Pageable pageRequest);
+	
+	List<OrderDto> findByPriceBetween(double minPrice, double maxPrice);
 
 }

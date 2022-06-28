@@ -54,6 +54,14 @@ public class OrderService {
 		return responseMap;
 	}
 	
+	public List<OrderDto> fetchAllOrdersByPriceRange(double min, double max){
+		//Java 11 and beyond
+		//return Set.copyOf(this.orderRepository.findAll());
+		//set the pagination support
+		return this.orderRepository.findByPriceBetween(min, max);
+		
+	}
+	
 	public Order fetchOrderById(long orderId) {
 		//imperative style
 		/*
