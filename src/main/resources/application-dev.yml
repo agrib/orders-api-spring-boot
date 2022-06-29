@@ -20,6 +20,12 @@ spring:
     properties:
       hibernate:
         format_sql: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-7858070.okta.com/oauth2/default
+          jwk-set-uri: https://dev-7858070.okta.com/oauth2/default/v1/keys 
 management:
   endpoints:
     web:
@@ -30,4 +36,3 @@ management:
       show-details: always
     shutdown:
       enabled: true
-                  
